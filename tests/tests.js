@@ -58,13 +58,13 @@ describe("Test para ConverTemp", function() {
 
 
     it("45C = 113F", function() {
-      /*var temp = new Temperatura();
+      var temp = new Temperatura();
 
-      temp.set_valor(32.0576);
-      temp.set_tipo("F");
+      temp.set_valor(45);
+      temp.set_tipo("C");
 
-      var result = temp.convertir();*/
-      original.value = "45C";
+      //var result = temp.convertir();
+      //original.value = "45C";
       convertir()
       expect(converted.innerHTML).to.equal("113 Fahrenheit");
 
