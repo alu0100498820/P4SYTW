@@ -63,10 +63,8 @@ describe("Test para ConverTemp", function() {
       temp.set_valor(45);
       temp.set_tipo("C");
 
-      //var result = temp.convertir();
-      //original.value = "45C";
-      convertir()
-      expect(converted.innerHTML).to.equal("113Fahrenheit");
+      var result = temp.convertir();
+  
 
       var espia = sinon.spy();
       espia(result);
