@@ -53,7 +53,7 @@ describe("Test para ConverTemp", function() {
 
       var result = convertir();
 
-      expect(result).to.equal("32.0576Fahrenheit");
+      expect(result.innerHTML).to.equal("32.0576 Fahrenheit");
     });
 
 
