@@ -63,7 +63,7 @@ describe("Test para ConverTemp", function() {
       temp.set_valor(45);
       temp.set_tipo("C");
 
-      var result = convertir();
+      var result =  temp.pasar_a_f();
   
 
       var espia = sinon.spy();
