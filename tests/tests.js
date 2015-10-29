@@ -1,73 +1,110 @@
 var expect = chai.expect;
 
-describe("__ TEST BDD __", function() {
+describe("Test para ConverTemp", function() {
 
+    it("Debería ser: 32e4F", function() {
+      var temp = new Temperatura();
 
+      temp.set_valor(32e4);
+      temp.set_tipo("F");
 
-  it("32F", function() {
-    var temp = new Temperatura(32,"F");
-    expect(temp.get_valor()).to.equal(32);
-    expect(temp.get_tipo()).to.equal("F");
-  });
+      var espia = sinon.spy();
+      espia(temp.get_valor());
 
-  it("45C", function() {
-    var temp = new Temperatura(45,"C");
-    expect(temp.get_valor()).to.equal(45);
-    expect(temp.get_tipo()).to.equal("C");
-  });
+      expect(espia.called).to.be.true;
+      expect(espia.calledOnce).to.be.true;
+      expect(espia.firstCall.calledWith(32e4)).to.be.true;
+      expect(espia.firstCall.calledWith(sinon.match.number)).to.be.true;
 
-  it("5X = ERROR", function() {
+      expect(temp.get_valor()).to.equal(32e4);
+      expect(temp.get_tipo()).to.equal("F");
+    });
+
+    it("Debería ser: -4.3e-2C", function() {
+      var temp = new Temperatura();
+      temp.set_valor(-4.3e-2);
+      temp.set_tipo("C");
+
+      var espia = sinon.spy();
+      espia(temp.get_tipo());
+
+      expect(espia.called).to.be.true;
+      expect(espia.calledOnce).to.be.true;
+      expect(espia.firstCall.calledWith("C")).to.be.true;
+      expect(espia.firstCall.calledWith(sinon.match.string)).to.be.true;
+
+      expect(temp.get_valor()).to.equal(-4.3e-2);
+      expect(temp.get_tipo()).to.equal("C");
+    });
+
+    it("0.032C === 32.0576F", function() {
+      var temp = new Temperatura();
+
+      temp.set_valor(0.032);
+      temp.set_tipo("C");
+
+      var espia = sinon.spy();
+      espia(temp.get_valor());
+
+      expect(espia.called).to.be.true;
+      expect(espia.calledOnce).to.be.true;
+      expect(espia.firstCall.calledWith(0.032)).to.be.true;
+      expect(espia.firstCall.calledWith(sinon.match.number)).to.be.true;
+
+      var res = temp.convertir();
+
+      expect(res).to.equal("El resultado es: 32.0576 F");
+    });
+
+    it("inicializador()", function() {
+      var temp = new Temperatura();
+      temp.inicializador("0.032C");
+
+      var espia = sinon.stub();
+      espia.withArgs(0.032).returns(temp.get_valor());
+      espia.throws();
+
+      expect(espia(0.032)).to.equal(temp.get_valor());
+      expect(espia).to.throw(Error);
+
+      expect(temp.get_valor()).to.equal(0.032);
+      expect(temp.get_tipo()).to.equal("C");
+    });
+
+    it("32,0576F === 0.032C", function() {
+      var temp = new Temperatura();
+
+      temp.set_valor(32.0576);
+      temp.set_tipo("F");
+
+      var res = temp.convertir();
+
+      var espia = sinon.spy();
+      espia(res);
+
+      expect(espia.called).to.be.true;
+      expect(espia.calledOnce).to.be.true;
+      expect(espia.firstCall.calledWith("El resultado es: 0.032000000000000424 C")).to.be.true;
+      expect(espia.firstCall.calledWith(sinon.match.string)).to.be.true;
+
+      expect(res).to.equal("El resultado es: 0.032000000000000424 C");
+    });
+
+    it("convertir()", function() {
       window.onload = function() {
-        var temp = new Temperatura(5,0,"X");
-        convertir();
-        expect(fin.innerHTML).to.match("/ERROR/");
-      }
-    });
+        var ini = document.getElementById("inicial");
 
-  it("2.34C = 36.212F", function() {
-    var temp = new Temperatura();
-    temp.set_valor(2.34);
-    temp.set_tipo("C");
-    var result = temp.pasar_a_f();
-    expect(result).to.equal(36.212);
-  });
-
-  it("32F = 0C", function() {
-    var temp = new Temperatura();
-    temp.set_valor(32);
-    temp.set_tipo("F");
-    var result = temp.pasar_a_c();
-    expect(result).to.equal(0);
-  });
-
-
-  it("32F === 0C", function() {
-    var temp = new Temperatura();
-    temp.set_valor(32);
-    temp.set_tipo("F");
-    var result = convertir();
-    expect(result).to.equal(0);
-  });
-  
-  it("Prueba4", function() {
-        original.value = "32F";
-        convertir()
-        expect(converted.innerHTML).to.equal("0 Celsius");
-    });
-    
-  it("Prueba 5", function() {
-        original.value = "45C";
-        convertir()
-        expect(converted.innerHTML).to.equal("113 Fahrenheit");
-    });
-        
-        it("convertir()", function() {
-        window.onload = function() {
         ini.value = "0C";
         convertir();
+
+        var espia = sinon.stub();
+        espia.withArgs("El resultado es: 32.0576 F").returns(convertir());
+        espia.throws();
+
+        expect(espia("El resultado es: 32.0576 F")).to.equal(convertir());
+        expect(espia).to.throw(Error);
 
         expect(resultado.innerHTML).to.equal("El resultado es: 32.0576 F");
       }
     });
-
 });
