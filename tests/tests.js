@@ -37,32 +37,13 @@ describe("Test para ConverTemp", function() {
       expect(temp.get_tipo()).to.equal("C");
     });
 
-    it("0.032C = 32.0576F", function() {
-      var temp = new Temperatura();
-
-      temp.set_valor(0.032);
-      temp.set_tipo("C");
-
-      var espia = sinon.spy();
-      espia(temp.get_valor());
-
-      expect(espia.called).to.be.true;
-      expect(espia.calledOnce).to.be.true;
-      expect(espia.firstCall.calledWith(0.032)).to.be.true;
-      expect(espia.firstCall.calledWith(sinon.match.number)).to.be.true;
-
-      var result = convertir();
-
-      expect(result.innerHTML).to.equal("32.0576 Fahrenheit");
-    });
-
-
+    
     it("45C = 113F", function() {
       
-    var temp = new Temperatura();
-    temp.set_valor(45);
-    temp.set_tipo("C");
-    var result = temp.pasar_a_f();
+      var temp = new Temperatura();
+      temp.set_valor(45);
+      temp.set_tipo("C");
+      var result = temp.pasar_a_f();
 
       var espia = sinon.spy();
       espia(result);
