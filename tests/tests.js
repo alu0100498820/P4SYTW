@@ -37,7 +37,7 @@ describe("Test para ConverTemp", function() {
       expect(temp.get_tipo()).to.equal("C");
     });
 
-    it("0.032C === 32.0576F", function() {
+    it("0.032C = 32.0576F", function() {
       var temp = new Temperatura();
 
       temp.set_valor(0.032);
@@ -51,9 +51,9 @@ describe("Test para ConverTemp", function() {
       expect(espia.firstCall.calledWith(0.032)).to.be.true;
       expect(espia.firstCall.calledWith(sinon.match.number)).to.be.true;
 
-      var res = temp.convertir();
+      var result = temp.convertir();
 
-      expect(res).to.equal("El resultado es: 32.0576 F");
+      expect(result).to.equal("El resultado es: 32.0576 F");
     });
 
     it("inicializador()", function() {
@@ -77,10 +77,10 @@ describe("Test para ConverTemp", function() {
       temp.set_valor(32.0576);
       temp.set_tipo("F");
 
-      var res = temp.convertir();
+      var result = temp.convertir();
 
       var espia = sinon.spy();
-      espia(res);
+      espia(result);
 
       expect(espia.called).to.be.true;
       expect(espia.calledOnce).to.be.true;
