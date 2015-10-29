@@ -1,8 +1,49 @@
+# Grado de Ingeniería Informática
 
+## Práctica 4: Conversor en JavaScript de grados Celsius a Farenheit y viceversa (Uso de iaas.ull.es)
 
-
+<p align="Center">
+  <img src="https://lh3.ggpht.com/Vn9sIUPcCVihrxMATWR_MjCIFuc5quCw-R3UN8Rmoze7rgaBhHdmF2RqjX3x28EJoQ=w300" title="C_Temperaturas." width="150" height="150">
+</p>
 
 ---
+#### *Descripción de la Práctica:*
+
+  + Siguiendo las instrucciones en el repositorio despliegue la práctica anterior Karma, Travis y Web Workers en su máquina virtual del servicio iaas.ull.es.
+  + Si no ha usado Sinon.JS en la práctica anterior añada pruebas de mocking con Sinon.JS.
+  + Añada en el README.md un pequeño tutorial de como usar y desplegar una aplicación web en iaas.ull.es.
+
+  + La IP dinámica de su máquina virtual no debería cambiar.
+  + Publique la URL de despliegue en su máquina además de los enlaces habituales.
+
+> *Enlace a la página personal:*
+
+  * http://alu0100498820.github.io
+
+
+
+> *Enlace web:*
+
+  * http://alu0100498820.github.io/P4SYTW
+
+
+
+> *Ejecución de Pruebas*
+
+  * http://alu0100498820.github.io/P4SYTW/tests/test_blanket.html
+
+
+> *Despliegue de la Aplicación en el IAAS
+
+  * http://10.6.128.95:8080/index.html
+
+> *Ejecución de Travis*
+
+  * https://travis-ci.org/alu0100498820/P4SYTW   [![Build Status](https://travis-ci.org/alu0100498820/P4SYTW.svg?branch=gh-pages)](https://travis-ci.org/alu0100498820/P4SYTW)
+
+---
+# TUTORIAL
+
 Lo primero que haremos es entrar en la página del IAAS ([iaas.ull.es](http://iaas.ull.es/ovirt-engine/))
 ![Sin titulo](imagenes tutorial/i1.png)
 
@@ -51,4 +92,48 @@ Lugo iremos al directorio ~/.ssh y copiamos la clave del directorio id_rsa.pub, 
 
 ![Sin titulo](imagenes tutorial/i8.png)
 
-Como no podemos usar la terminal del IAAS para copiar la contraseña nos vamos a una terminal de nuestro computador y accedemos mediante SSH
+Como no podemos usar la terminal del IAAS para copiar la calve nos vamos a una terminal de nuestro computador y accedemos mediante SSH
+
+![Sin titulo](imagenes tutorial/i9.png)
+
+luego accedemos al direcorio donde se guardan las claves, copiamos y las pegamos en GitHub .
+
+Una vez terminado con el paso anterior creamos los siguientes directorios
+
+    $ mkdir src
+    $ cd src
+    $ mkdir sytw
+    $ cd sytw
+
+A continuación clonamos el repositorio de la practica con el comando:
+
+    $ git clone <URL>
+
+![Sin titulo](imagenes tutorial/i10.png)
+
+Cuando lo hayamos clonado vamos al fichero ***"static-server.js"*** y hacemos las siguientes modificaciones:
+
+    var static = require('node-static');
+
+    var fileServer = new static.Server('./');
+
+    console.log("Visit http://10.6.128.95:8080/index.html")
+    require('http').createServer(function (request, response) {
+        request.addListener('end', function () {
+            fileServer.serve(request, response);
+        }).resume();
+    }).listen(8080);
+
+Para finalizar instalamos las dependencias con el comando
+
+    $ npm install
+
+Y luego ejecutamos
+
+    $sudo nodejs static-server.js
+
+![Sin titulo](imagenes tutorial/i11.png)
+
+Para comprobar entramos en un navegador y escribimos la IP para que nos muestre la página (http://10.6.128.95:8080/index.html)
+
+![Sin titulo](imagenes tutorial/i12.png)  
