@@ -71,7 +71,7 @@ describe("Test para ConverTemp", function() {
 
       expect(espia.called).to.be.true;
       expect(espia.calledOnce).to.be.true;
-      expect(espia.firstCall.calledWith("El resultado es: 113 Fahrenheit")).to.be.true;
+      expect(espia.firstCall.calledWith("113 Fahrenheit")).to.be.true;
       expect(espia.firstCall.calledWith(sinon.match.string)).to.be.true;
 
       expect(result).to.equal("113 Fahrenheit");
