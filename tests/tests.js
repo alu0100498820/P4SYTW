@@ -53,7 +53,7 @@ describe("Test para ConverTemp", function() {
 
       var result = convertir();
 
-      expect(result).to.equal("El resultado es: 32.0576 F");
+      expect(result).to.equal("32.0576 Fahrenheit");
     });
 
 
@@ -76,7 +76,7 @@ describe("Test para ConverTemp", function() {
       expect(espia.firstCall.calledWith("El resultado es: 113 Fahrenheit")).to.be.true;
       expect(espia.firstCall.calledWith(sinon.match.string)).to.be.true;
 
-      expect(result).to.equal("El resultado es:113 Fahrenheit");
+      expect(result).to.equal("113 Fahrenheit");
     });
 
     it("convertir()", function() {
@@ -87,13 +87,13 @@ describe("Test para ConverTemp", function() {
         convertir();
 
         var espia = sinon.stub();
-        espia.withArgs("El resultado es: 32.0576 F").returns(convertir());
+        espia.withArgs("32.0576 Fahrenheit").returns(convertir());
         espia.throws();
 
-        expect(espia("El resultado es: 32.0576 F")).to.equal(convertir());
+        expect(espia("32.0576 Fahrenheit")).to.equal(convertir());
         expect(espia).to.throw(Error);
 
-        expect(resultado.innerHTML).to.equal("El resultado es: 32.0576 F");
+        expect(resultado.innerHTML).to.equal("32.0576 Fahrenheit");
       }
     });
 });
