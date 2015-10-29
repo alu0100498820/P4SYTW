@@ -66,10 +66,10 @@ describe("Test para ConverTemp", function() {
 
       expect(espia.called).to.be.true;
       expect(espia.calledOnce).to.be.true;
-      expect(espia.firstCall.calledWith("113Fahrenheit")).to.be.true;
+      //expect(espia.firstCall.calledWith(113)).to.be.true;
       expect(espia.firstCall.calledWith(sinon.match.string)).to.be.true;
 
-      expect(converted.innerHTML).to.equal("113Fahrenheit");
+      expect(converted.innerHTML).to.equal("113 Fahrenheit");
     });
 
     it("convertir()", function() {
