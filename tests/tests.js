@@ -53,7 +53,7 @@ describe("Test para ConverTemp", function() {
 
       var result = convertir();
 
-      expect(result).to.equal("32.0576 Fahrenheit");
+      expect(result).to.equal("32.0576Fahrenheit");
     });
 
 
@@ -66,7 +66,7 @@ describe("Test para ConverTemp", function() {
       //var result = temp.convertir();
       //original.value = "45C";
       convertir()
-      expect(converted.innerHTML).to.equal("113 Fahrenheit");
+      expect(converted.innerHTML).to.equal("113Fahrenheit");
 
       var espia = sinon.spy();
       espia(result);
@@ -87,13 +87,13 @@ describe("Test para ConverTemp", function() {
         convertir();
 
         var espia = sinon.stub();
-        espia.withArgs("32.0576 Fahrenheit").returns(convertir());
+        espia.withArgs("32.0576Fahrenheit").returns(convertir());
         espia.throws();
 
-        expect(espia("32.0576 Fahrenheit")).to.equal(convertir());
+        expect(espia("32.0576Fahrenheit")).to.equal(convertir());
         expect(espia).to.throw(Error);
 
-        expect(resultado.innerHTML).to.equal("32.0576 Fahrenheit");
+        expect(resultado.innerHTML).to.equal("32.0576Fahrenheit");
       }
     });
 });
