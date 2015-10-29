@@ -51,7 +51,7 @@ describe("Test para ConverTemp", function() {
       expect(espia.firstCall.calledWith(0.032)).to.be.true;
       expect(espia.firstCall.calledWith(sinon.match.number)).to.be.true;
 
-      var result = temp.convertir();
+      var result = convertir();
 
       expect(result).to.equal("El resultado es: 32.0576 F");
     });
